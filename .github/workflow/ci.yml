@@ -1,0 +1,21 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npx eslint app.js
+
+      - name: Build Docker image
+        run: docker build -t my-app .
